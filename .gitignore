@@ -1,0 +1,24 @@
+.DS_Store
+.Vagrantfile.swp
+thumbs.db
+node_modules
+.vagrant/
+.idea
+.tmp
+.env
+.next
+*.log
+*.sql
+cache/*
+.htaccess
+
+# WordPress related files
+wordpress/public/readme.html
+wordpress/public/wp-content/advanced-cache.php
+wordpress/public/wp-content/cache/
+wordpress/public/wp-content/upgrade/
+wordpress/public/wp-content/uploads/
+wordpress/public/wp-content/webp-express/
+
+# prevent distributes files from being committed
+wordpress/public/wp-content/themes/headless/dist/
