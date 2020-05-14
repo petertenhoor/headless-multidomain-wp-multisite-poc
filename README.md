@@ -51,7 +51,7 @@ Run in dev mode
 
 Run in production mode
 
-```npm run build```
+```npm run build && npm run start```
 
 ## Insights
 
