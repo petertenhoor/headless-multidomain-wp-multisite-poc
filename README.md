@@ -49,5 +49,5 @@ sudo nginx -s stop && sudo nginx
     - Import aliases using jsconfig.json
 5. New redux approach (next-redux-wrapper V6)
     - New debug feature
-    - No more <Provider/> component in _app.js
+    - No more ```<Provider/>``` component in _app.js
     - Using React hooks to fetch data from state and dispatch actions (no more connect)
