@@ -62,11 +62,13 @@ Run in production mode
     - Other generic stuff like serving the correct sitemap etc
 2. Local Nginx reverse proxies are a thing (Build your own ValetPlus for node.js)
 3. Passing headers via Nginx is a more solid solution than matching hostNames (Thanks Tom Meijnaerts).
-4. New next.js features
+4. Keeping cache keys unique (added siteId)
+5. Express middleware usage for passing nginx headers
+6. New next.js features
     - Built in .env support (in client)
     - No more fetch import needed
     - Import aliases using jsconfig.json
-5. New redux approach (next-redux-wrapper V6)
+7. New redux approach (next-redux-wrapper V6)
     - New debug feature
     - No more ```<Provider/>``` component in _app.js
     - Using React hooks to fetch data from state and dispatch actions (no more connect)
