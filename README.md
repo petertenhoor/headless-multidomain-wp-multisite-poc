@@ -1,4 +1,5 @@
 # headless-multidomain-wp-multisite-poc
+
 Proof of concept for a headless multisite WordPress setup running on multiple (sub)domains.
 
 ## Set up local nginx to reverse proxy multiple domains to one port
@@ -34,6 +35,24 @@ sudo nginx -s stop && sudo nginx
 127.0.0.1 www.klaas.test
 ```
 
+## Setup .env
+
+Rename the .env.example file to .env
+
+## Run the project
+
+Install dependencies
+
+```npm install```
+
+Run in dev mode
+
+```npm run dev```
+
+Run in production mode
+
+```npm run build```
+
 ## Insights
 
 1. Headless multidomain WP multisite in one application will work. The following has to be done to use it in production:
@@ -42,7 +61,7 @@ sudo nginx -s stop && sudo nginx
     - Build a language switcher (default home link or connected post)
     - Other generic stuff like serving the correct sitemap etc
 2. Local Nginx reverse proxies are a thing (Build your own ValetPlus for node.js)
-3. Passing headers via Nginx is more solid than matching hostNames (Thanks Tom).
+3. Passing headers via Nginx is a more solid solution than matching hostNames (Thanks Tom Meijnaerts).
 4. New next.js features
     - Built in .env support (in client)
     - No more fetch import needed
