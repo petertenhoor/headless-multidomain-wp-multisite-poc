@@ -19,10 +19,10 @@ export default (state = initialState, action) => {
 
     switch (type) {
         case HYDRATE:
-            return {...state, ...action.payload};
+            return {...state, ...payload}
         case SET_SITE_DATA:
             return {...state, ...payload}
+        default:
+            return state
     }
-
-    return state
 }

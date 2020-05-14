@@ -2,19 +2,31 @@ import {useSelector} from "react-redux"
 
 import Nav from "components/Nav"
 
-import {wrapper} from "redux/store"
+import {getPageData} from "models/pageModel"
 
-const SinglePage = () => {
+const SinglePage = ({heading, content, pages}) => {
     const {siteId, siteUrl, siteLanguage} = useSelector(state => state)
+
     return (
         <div>
-            <h1>Single Page</h1>
-            <p>Site ID: {siteId}</p>
-            <p>Site URL: {siteUrl}</p>
-            <p>Site language: {siteLanguage}</p>
-            <Nav/>
+            <Nav pages={pages}/>
+
+            <h1>{heading}</h1>
+
+            <p>{content}</p>
+
+            <div><small>Site ID: {siteId}</small></div>
+            <div><small>Site url: {siteUrl}</small></div>
+            <div><small>Site language: {siteLanguage}</small></div>
+
         </div>
     )
 }
 
-export default wrapper.withRedux(SinglePage)
+SinglePage.getInitialProps = async (context) => {
+    const {success, data} = await getPageData(context.site, context.query.slug)
+    //TODO catch 404 based on success
+    return data
+}
+
+export default SinglePage

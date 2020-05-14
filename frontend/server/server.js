@@ -13,6 +13,9 @@ import ApiCacheModel from "./models/ApiCacheModel"
 
 import withSiteData from "./middlewares/withSiteData"
 
+//import fake data
+import {getPages, getPageBySlug} from "./data/pages"
+
 const server = express()
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dir: '.', dev})
@@ -48,14 +51,37 @@ app.prepare().then(() => {
     server.get('/static/*', async (req, res) => handle(req, res))
     server.get('/_next/*', async (req, res) => handle(req, res))
 
+    //pages api endpoint
+    server.get('/api/:siteId/pages', async (req, res) => {
+        const siteId = parseInt(req.params.siteId)
+        const data = await getPages(siteId)
+        if (data !== false) return res.json({success: true, data})
+        return res.status(404).send(`No pages data found for siteId ${siteId}.`)
+    })
+
+    //page api endpoint
+    server.get('/api/:siteId/page/:slug', async (req, res) => {
+        const siteId = parseInt(req.params.siteId)
+        const slug = req.params.slug
+        const data = await getPageBySlug(siteId, slug)
+        if (data !== false) return res.json({success: true, data})
+        return res.status(404).send(`No page data found for siteId ${siteId} and slug ${slug}.`)
+    })
+
     //handle home route
     server.get(`/`, withSiteData, async (req, res) => {
-        return await SsrCacheModelInstance.renderAndCacheDynamic(app, req, res, '/home-page', {site: res.site}, !dev)
+        return await SsrCacheModelInstance.renderAndCacheDynamic(app, req, res, '/single-page', {
+            slug: '',
+            site: res.site
+        }, !dev)
     })
 
     //handle page routes
     server.get('/*', withSiteData, async (req, res) => {
-        return await SsrCacheModelInstance.renderAndCacheDynamic(app, req, res, '/single-page', {slug: req.params[0], site: res.site}, !dev)
+        return await SsrCacheModelInstance.renderAndCacheDynamic(app, req, res, '/single-page', {
+            slug: req.params[0],
+            site: res.site
+        }, !dev)
     })
 })
 

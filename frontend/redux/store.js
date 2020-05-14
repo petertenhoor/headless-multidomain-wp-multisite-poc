@@ -4,9 +4,6 @@ import {composeWithDevTools} from "redux-devtools-extension/developmentOnly"
 
 import reducer from "./reducers/reducer"
 
-const makeStore = (context) => {
-    const store = createStore(reducer, composeWithDevTools())
-    return store
-}
+const makeStore = () => createStore(reducer, composeWithDevTools())
 
 export const wrapper = createWrapper(makeStore, {debug: process.env.DEV === 'true'})
